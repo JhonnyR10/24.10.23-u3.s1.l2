@@ -45,12 +45,12 @@ class SingleBook extends Component {
             src={book.img}
             onClick={this.handleToggleSelected}
           />
-          <Card.Body>
+          <Card.Body style={{ backgroundColor: "#d1e7dd" }}>
             <Card.Title className="text-nowrap text-truncate">
               {book.title}
             </Card.Title>
             <Card.Text>Price {book.price}$</Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button variant="success">Add to Cart</Button>
           </Card.Body>
         </Card>
       </Col>

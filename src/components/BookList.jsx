@@ -35,18 +35,18 @@ class BookList extends Component {
   render() {
     return (
       <Container>
-        <Row>
+        <Row className="justify-content-center">
           <div className="col-md-6 mb-3">
             <input
               type="text"
-              className="form-control"
+              className="form-control bg-success"
               placeholder="Title Search"
               value={this.state.searchTerm}
               onChange={this.handleSearch}
             />
           </div>
         </Row>
-        <Row>
+        <Row className="gy-2 mb-3">
           {this.state.filteredBooks.map((book, index) => (
             <SingleBook key={index} book={book} />
           ))}
