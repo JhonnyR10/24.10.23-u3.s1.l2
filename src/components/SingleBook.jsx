@@ -34,7 +34,7 @@ class SingleBook extends Component {
     const { selected } = this.state;
     let cardClassName = "h-100";
     if (selected) {
-      cardClassName += " border border-danger";
+      cardClassName += " border border-3 border-danger";
     }
     return (
       <Col sm={6} md={4} lg={2}>
