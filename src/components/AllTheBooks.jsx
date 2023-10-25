@@ -11,9 +11,9 @@ const AllTheBooks = (props) => {
     <Container>
       <h2>{props.genere}</h2>
       <Row className="gy-2">
-        {firstSixBooks.map((book, i) => {
+        {firstSixBooks.map((book) => {
           return (
-            <Col key={i} md={4}>
+            <Col key={book.asin} sm={6} md={4} lg={2}>
               <Card className="h-100">
                 <Card.Img className="h-75" variant="top" src={book.img} />
                 <Card.Body>
