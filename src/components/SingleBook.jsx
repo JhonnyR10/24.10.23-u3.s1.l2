@@ -2,6 +2,7 @@ import { Component } from "react";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import CommentArea from "./CommentArea";
 
 // const SingleBook = ({ book }) => {
 //   return (
@@ -51,6 +52,7 @@ class SingleBook extends Component {
             </Card.Title>
             <Card.Text>Price {book.price}$</Card.Text>
             <Button variant="success">Add to Cart</Button>
+            {this.state.selected && <CommentArea bookSelected={book.asin} />}
           </Card.Body>
         </Card>
       </Col>
