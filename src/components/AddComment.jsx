@@ -44,7 +44,10 @@ class AddComment extends Component {
   render() {
     console.log(this.props.asin);
     return (
-      <Form onSubmit={this.handleFormSubmit}>
+      <Form
+        onSubmit={this.handleFormSubmit}
+        className="border border-success p-2 mt-2"
+      >
         <Form.Group className="mb-3">
           <Form.Label>Comment</Form.Label>
           <Form.Control

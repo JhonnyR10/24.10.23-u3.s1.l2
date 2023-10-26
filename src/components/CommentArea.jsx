@@ -1,6 +1,8 @@
 import { Component } from "react";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
+import Loading from "./Loading";
+import Error from "./Error";
 
 class CommentArea extends Component {
   state = {
@@ -10,6 +12,8 @@ class CommentArea extends Component {
     //   elementId: "",
     // },
     review: [],
+    loading: true,
+    error: false,
   };
   getComments = () => {
     console.log(this.props.bookSelected);
@@ -28,6 +32,9 @@ class CommentArea extends Component {
         if (res.ok) {
           return res.json();
         } else {
+          this.setState({
+            error: true,
+          });
           throw new Error("Errore nella richiesta");
         }
       })
@@ -35,10 +42,14 @@ class CommentArea extends Component {
         console.log(data);
         this.setState({
           review: data,
+          loading: false,
         });
       })
       .catch((error) => {
         console.error("Si è verificato un errore:", error);
+        this.setState({
+          error: true,
+        });
       });
   };
   componentDidMount() {
@@ -47,7 +58,15 @@ class CommentArea extends Component {
   render() {
     console.log(this.state.review);
     return (
-      <div>
+      <div className="text-center">
+        {this.state.error && <Error />}
+
+        {this.state.loading && (
+          <div className="d-flex justify-content-center mt-1">
+            <Loading />
+          </div>
+        )}
+
         <CommentList listaReview={this.state.review} />
         <AddComment asin={this.props.bookSelected} />
       </div>

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Col from "react-bootstrap/Col";
+
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import CommentArea from "./CommentArea";
@@ -33,15 +33,16 @@ class SingleBook extends Component {
   render() {
     const { book } = this.props;
     const { selected } = this.state;
-    let cardClassName = "h-100";
+    let cardClassName = " ";
     if (selected) {
       cardClassName += " border border-3 border-danger";
     }
     return (
-      <Col sm={6} md={4} lg={2}>
+      <>
         <Card className={cardClassName}>
           <Card.Img
-            className="h-75"
+            style={{ height: "340px" }}
+            className=""
             variant="top"
             src={book.img}
             onClick={this.handleToggleSelected}
@@ -52,10 +53,11 @@ class SingleBook extends Component {
             </Card.Title>
             <Card.Text>Price {book.price}$</Card.Text>
             <Button variant="success">Add to Cart</Button>
-            {this.state.selected && <CommentArea bookSelected={book.asin} />}
           </Card.Body>
         </Card>
-      </Col>
+
+        {this.state.selected && <CommentArea bookSelected={book.asin} />}
+      </>
     );
   }
 }

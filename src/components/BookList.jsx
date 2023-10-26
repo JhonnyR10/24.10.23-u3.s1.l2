@@ -1,7 +1,9 @@
 import { Component } from "react";
-import Container from "react-bootstrap/Container";
+
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import SingleBook from "./SingleBook";
+import { Container } from "react-bootstrap";
 
 // const BookList = ({ books }) => {
 //   console.log(books);
@@ -46,9 +48,12 @@ class BookList extends Component {
             />
           </div>
         </Row>
+
         <Row className="gy-2 mb-3">
           {this.state.filteredBooks.map((book, index) => (
-            <SingleBook key={index} book={book} />
+            <Col key={index} xs={6} sm={6} md={4} lg={3} xl={3}>
+              <SingleBook book={book} />
+            </Col>
           ))}
         </Row>
       </Container>
