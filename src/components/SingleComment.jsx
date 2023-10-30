@@ -4,9 +4,9 @@ import { Trash3Fill } from "react-bootstrap-icons";
 
 class SingleComment extends Component {
   render() {
-    console.log(this.props.SingleReview._id);
+    // console.log(this.props.SingleReview._id);
     return (
-      <ListGroupItem className="d-flex justify-content-between align-items-center mt-3">
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
         <div>{this.props.SingleReview.comment} </div>
 
         <Button

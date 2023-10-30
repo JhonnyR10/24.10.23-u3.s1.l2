@@ -24,6 +24,7 @@ class AddComment extends Component {
       .then((res) => {
         console.log("RESPONSE", res);
         if (res.ok) {
+          this.props.getComments();
           this.setState({
             review: {
               comment: "",
@@ -42,7 +43,7 @@ class AddComment extends Component {
       });
   };
   render() {
-    console.log(this.props.asin);
+    // console.log(this.props.asin);
     return (
       <Form
         onSubmit={this.handleFormSubmit}

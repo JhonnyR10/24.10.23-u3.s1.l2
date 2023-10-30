@@ -20,20 +20,25 @@ import { Container } from "react-bootstrap";
 
 class BookList extends Component {
   state = {
+    selectedBookAsin: null,
     searchTerm: "",
     filteredBooks: this.props.books, //cosi mostro tutti i libri all'inizio
   };
 
   handleSearch = (e) => {
     const searchTerm = e.target.value;
-    this.setState({ searchTerm }); //piazzo quello che scrivo nell'input nello state
+    this.setState({ searchTerm, selectedBookAsin: null }); //piazzo quello che scrivo nell'input nello state
 
     const filtered = this.props.books.filter((book) =>
       book.title.toLowerCase().includes(searchTerm.toLowerCase())
     ); //modifico l'array iniziale filtrando e includendo solo quello che ho scritto nell'input e che è presente nello state
     this.setState({ filteredBooks: filtered }); //mostro solo quelli che corrispondono
   };
-
+  handleToggleSelected = (asin) => {
+    this.setState({
+      selectedBookAsin: asin,
+    });
+  };
   render() {
     return (
       <Container>
@@ -48,12 +53,14 @@ class BookList extends Component {
             />
           </div>
         </Row>
-
         <Row className="gy-2 mb-3">
           {this.state.filteredBooks.map((book, index) => (
-            <Col key={index} xs={6} sm={6} md={4} lg={3} xl={3}>
-              <SingleBook book={book} />
-            </Col>
+            <SingleBook
+              key={index}
+              book={book}
+              isSelected={book.asin === this.state.selectedBookAsin}
+              handleToggleSelected={this.handleToggleSelected}
+            />
           ))}
         </Row>
       </Container>

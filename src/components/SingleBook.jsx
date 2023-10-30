@@ -3,6 +3,7 @@ import { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import CommentArea from "./CommentArea";
+import { Col, Row } from "react-bootstrap";
 
 // const SingleBook = ({ book }) => {
 //   return (
@@ -22,41 +23,55 @@ import CommentArea from "./CommentArea";
 // };
 
 class SingleBook extends Component {
-  state = {
-    selected: false,
-  };
-  handleToggleSelected = () => {
-    this.setState((prevState) => ({
-      selected: !prevState.selected,
-    }));
-  };
+  // state = {
+  //   bookAsin: null,
+  // };
+
+  // handleToggleSelected = (asin) => {
+  //   this.setState(() => ({
+  //     bookAsin: asin,
+  //   }));
+  // };
+
   render() {
-    const { book } = this.props;
-    const { selected } = this.state;
-    let cardClassName = " ";
-    if (selected) {
-      cardClassName += " border border-3 border-danger";
-    }
+    // const { book } = this.props;
+    // const isSelected = book.asin === this.state.bookAsin;
+    const { book, isSelected, handleToggleSelected } = this.props;
+    const cardClassName = isSelected ? "border border-3 border-danger" : "";
+    // if (book.asin === this.state.bookAsin) {
+    //   cardClassName += " border border-3 border-danger";
+    // }
     return (
       <>
-        <Card className={cardClassName}>
-          <Card.Img
-            style={{ height: "340px" }}
-            className=""
-            variant="top"
-            src={book.img}
-            onClick={this.handleToggleSelected}
-          />
-          <Card.Body style={{ backgroundColor: "#d1e7dd" }}>
-            <Card.Title className="text-nowrap text-truncate">
-              {book.title}
-            </Card.Title>
-            <Card.Text>Price {book.price}$</Card.Text>
-            <Button variant="success">Add to Cart</Button>
-          </Card.Body>
-        </Card>
+        <Col md={4}>
+          <Card className={cardClassName}>
+            <Card.Img
+              style={{ height: "340px" }}
+              className=""
+              variant="top"
+              src={book.img}
+              onClick={() => handleToggleSelected(book.asin)}
+            />
+            <Card.Body style={{ backgroundColor: "#d1e7dd" }}>
+              <Card.Title className="text-nowrap text-truncate">
+                {book.title}
+              </Card.Title>
+              <Card.Text>Price {book.price}$</Card.Text>
+              <Button variant="success">Add to Cart</Button>
+            </Card.Body>
+          </Card>
+        </Col>
 
-        {this.state.selected && <CommentArea bookSelected={book.asin} />}
+        <Col md={8}>
+          {isSelected && (
+            <CommentArea
+              // bookSelected={book.asin}
+              // stateSelected={this.state.selected}
+              // bookState={this.state.bookAsin}
+              bookSelected={book.asin}
+            />
+          )}
+        </Col>
       </>
     );
   }

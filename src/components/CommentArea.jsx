@@ -11,14 +11,15 @@ class CommentArea extends Component {
     //   rate: "",
     //   elementId: "",
     // },
-    review: [],
+    review: null,
     loading: true,
     error: false,
   };
   getComments = () => {
-    console.log(this.props.bookSelected);
+    // console.log(this.props.bookSelected);
     fetch(
       "https://striveschool-api.herokuapp.com/api/comments/" +
+        // this.props.bookState,
         this.props.bookSelected,
       {
         headers: {
@@ -34,12 +35,13 @@ class CommentArea extends Component {
         } else {
           this.setState({
             error: true,
+            loading: false,
           });
           throw new Error("Errore nella richiesta");
         }
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           review: data,
           loading: false,
@@ -49,14 +51,22 @@ class CommentArea extends Component {
         console.error("Si è verificato un errore:", error);
         this.setState({
           error: true,
+          loading: false,
         });
       });
   };
   componentDidMount() {
     this.getComments();
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.bookSelected !== this.props.bookSelected) {
+      console.log("ciao");
+      this.getComments();
+    }
+  }
   render() {
-    console.log(this.state.review);
+    // console.log("LOSTATOPASSATO", this.props.stateSelected);
+    // console.log(this.state.review);
     return (
       <div className="text-center">
         {this.state.error && <Error />}
@@ -66,9 +76,13 @@ class CommentArea extends Component {
             <Loading />
           </div>
         )}
-
-        <CommentList listaReview={this.state.review} />
-        <AddComment asin={this.props.bookSelected} />
+        {this.state.review && <CommentList listaReview={this.state.review} />}
+        {/* {this.props.stateSelected && ( */}
+        <AddComment
+          asin={this.props.bookSelected}
+          getComments={this.getComments}
+        />
+        {/* )} */}
       </div>
     );
   }

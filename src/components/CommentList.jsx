@@ -4,7 +4,7 @@ import { ListGroup } from "react-bootstrap";
 
 class CommentList extends Component {
   render() {
-    console.log(this.props.listaReview);
+    // console.log(this.props.listaReview);
     return (
       <ListGroup>
         {this.props.listaReview.map((comment, i) => {
