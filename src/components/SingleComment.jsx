@@ -27,6 +27,7 @@ class SingleComment extends Component {
                 if (res.ok) {
                   // l'eliminazione è andata bene
                   console.log("eliminazione completata");
+                  this.props.getComments();
                 } else {
                   // l'eliminazione NON è andata bene
                   throw new Error(

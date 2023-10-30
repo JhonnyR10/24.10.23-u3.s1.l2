@@ -55,13 +55,15 @@ class CommentArea extends Component {
         });
       });
   };
-  componentDidMount() {
-    this.getComments();
-  }
+  // componentDidMount() {
+  //   this.getComments();
+  // }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.bookSelected !== this.props.bookSelected) {
-      console.log("ciao");
       this.getComments();
+      this.setState({
+        loading: true,
+      });
     }
   }
   render() {
@@ -71,12 +73,17 @@ class CommentArea extends Component {
       <div className="text-center">
         {this.state.error && <Error />}
 
-        {this.state.loading && (
+        {this.state.loading && this.props.bookSelected && (
           <div className="d-flex justify-content-center mt-1">
             <Loading />
           </div>
         )}
-        {this.state.review && <CommentList listaReview={this.state.review} />}
+        {this.state.review && (
+          <CommentList
+            listaReview={this.state.review}
+            getComments={this.getComments}
+          />
+        )}
         {/* {this.props.stateSelected && ( */}
         <AddComment
           asin={this.props.bookSelected}

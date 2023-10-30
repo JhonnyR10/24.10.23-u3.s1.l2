@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SingleBook from "./SingleBook";
 import { Container } from "react-bootstrap";
+import CommentArea from "./CommentArea";
 
 // const BookList = ({ books }) => {
 //   console.log(books);
@@ -41,7 +42,7 @@ class BookList extends Component {
   };
   render() {
     return (
-      <Container>
+      <Container fluid>
         <Row className="justify-content-center">
           <div className="col-md-6 mb-3">
             <input
@@ -53,15 +54,28 @@ class BookList extends Component {
             />
           </div>
         </Row>
-        <Row className="gy-2 mb-3">
-          {this.state.filteredBooks.map((book, index) => (
-            <SingleBook
-              key={index}
-              book={book}
-              isSelected={book.asin === this.state.selectedBookAsin}
-              handleToggleSelected={this.handleToggleSelected}
+        <Row className="mb-3">
+          <Col md={6}>
+            <Row className="gy-2">
+              {this.state.filteredBooks.map((book, index) => (
+                <SingleBook
+                  key={index}
+                  book={book}
+                  isSelected={book.asin === this.state.selectedBookAsin}
+                  handleToggleSelected={this.handleToggleSelected}
+                />
+              ))}
+            </Row>
+          </Col>
+
+          <Col>
+            <CommentArea
+              // bookSelected={book.asin}
+              // stateSelected={this.state.selected}
+              // bookState={this.state.bookAsin}
+              bookSelected={this.state.selectedBookAsin}
             />
-          ))}
+          </Col>
         </Row>
       </Container>
     );

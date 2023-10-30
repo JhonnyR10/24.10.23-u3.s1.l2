@@ -46,7 +46,7 @@ class SingleBook extends Component {
         <Col md={4}>
           <Card className={cardClassName}>
             <Card.Img
-              style={{ height: "340px" }}
+              style={{ height: "300px" }}
               className=""
               variant="top"
               src={book.img}
@@ -61,8 +61,7 @@ class SingleBook extends Component {
             </Card.Body>
           </Card>
         </Col>
-
-        <Col md={8}>
+        {/* <Col md={8}>
           {isSelected && (
             <CommentArea
               // bookSelected={book.asin}
@@ -71,7 +70,7 @@ class SingleBook extends Component {
               bookSelected={book.asin}
             />
           )}
-        </Col>
+        </Col> */}
       </>
     );
   }
